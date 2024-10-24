@@ -9,3 +9,27 @@ quick example:
 quantity"
 "write a query to display the deliveries coming from a certain repository"
 "write a query to order the drivers by performance"
+
+
+L'OBJECTIF:
+
+create.sql 
+insert.sql
+select.sql
+update.sql
+drop.sql
+
+
+/* 1- Requêtes de consultation   */
+
+Informations sur les camions, les chauffeurs, les dépôts, les produits. La liste des livraisons
+en cours à une date donnée. La liste des chauffeurs originaires d’une ville donnée. Pour un
+dépôt, la liste de camions qui ont effectué des livraisons entrantes ou sortantes. . .
+
+
+/* 2- Requêtes de statistiques   */
+
+
+
+/* 3- Requêtes de mise à jour    */
+Ajout, suppression, modification d’un camion, d’un chauffeur, d’un dépôt.
