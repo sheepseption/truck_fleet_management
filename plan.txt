@@ -1,0 +1,89 @@
+write here the things that you think are questions or specicifications that need to be
+answered or translated to sql queries to maintain the database management
+
+
+quick example:
+"write a query to display the products present in a delivery"  
+"write a query to display the kilometers driven by a certain driver"
+"write a query to display the products present in a repository and their 
+quantity"
+"write a query to display the deliveries coming from a certain repository"
+"write a query to order the drivers by performance"
+
+
+L'OBJECTIF:
+
+create.sql voir tp
+insert.sql 
+select.sql 
+update.sql 
+drop.sql  voir tp
+
+
+/* 1- Requêtes de consultation   */ select.sql
+
+Informations sur les camions, les chauffeurs, les dépôts, les produits. La liste des livraisons
+en cours à une date donnée. La liste des chauffeurs originaires d’une ville donnée. Pour un
+dépôt, la liste de camions qui ont effectué des livraisons entrantes ou sortantes. . .
+
+Chauffeurs:
+*  selectionner les chauffeurs d'une certaine ville.
+*  chercher un chauffeur ayant un nom "nom".
+*  sélectionner l'ancieneté de chaque chauffeur.
+*  afficher les performances du chauffeur.
+
+Camions:
+*  sélectionner le kilomètrage pour chaque camion.
+*  sélectionner le kilomètrage après vidange.
+*  sélectionner les camions qui ont besoin d'un vidange.
+*  sélectionner la date du contrôle technique pour chaque camion.
+*  sélectionner les camions ayant besoin d'un contrôle technique.
+*  Penser à autres sélections utiles... 
+
+Livraisons:
+*  sélectionner les livraisons à une date donnée.
+*  sélectionner les livraisons entrantes/sortantes d'un dépôt.
+*  sélectionner les livraisons dans une période donnée.
+*  afficher les produits d'une livraison.
+*  afficher les camions/chauffeurs responsables d'une livraison.
+*  afficher le poids d'une livraison.
+*  lister pour chaque chauffeur la qualité de livraison pour l'un ou plusieurs de ses livraisons.
+*  sélectionner le nombre de livraisons pour chaque chauffeur.
+
+Produits:
+*  afficher les produits reçus/envoyés par un dépôt "x" lors d'une livraison.
+
+Dépôts:
+*  afficher la quantité stocké pour chaque produit présent dans un dépôt.
+*  afficher pour chaque dépôt/couple de dépôt la distance.
+
+
+Remarque:
+  Les trucs écrits pour chaque entité représenteront soit des requêtes concrètes de consultations, 
+  ou plutôt du code php concernant l'affichage.
+
+/* 2- Requêtes de statistiques   */
+
+— moyenne des poids transportés par camion par livraison,
+— moyenne des distances parcourues par les chauffeurs pour effectuer une livraison,
+— classement des chauffeurs,
+— classement des dépôts les plus proches d’une destination,
+— classement des camions vides les plus proches d’un dépôt.
+
+Chauffeurs:
+*  classer les chauffeurs selon l'ancieneté/rendement(nombre de livraison)/performance(absence, infraction).
+*  afficher ou classer les chauffeurs selon les distances parcourues.
+*  afficher la moyenne des distances parcourues par un chauffeur.
+*  classer les chauffeurs selon les moyennes des distances.
+        > sélectionner les chauffeurs qui font des longues/courtes livraisons selon les moyennes.
+
+Camoions:
+*  afficher la moyenne des poids qu'un camion transporte.
+*  classer les camions selon la moyenne des poids.
+*  
+
+
+
+
+/* 3- Requêtes de mise à jour    */
+Ajout, suppression, modification d’un camion, d’un chauffeur, d’un dépôt.
