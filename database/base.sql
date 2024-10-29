@@ -80,10 +80,19 @@ CREATE TABLE Camion (
 --   Table : LIVRAISON                                            
 
 -- ============================================================
-CREATE TABLE Livraison (
+
+CREATE TABLE Livraisons (
     Reference VARCHAR(20) PRIMARY KEY,
     Date_livraison DATE,
     Qualite_livraison VARCHAR(50)
+    Immatriculation INT NOT NULL,
+    Identifiant INT NOT NULL,
+    Numero_depot_entrant INT NOT NULL,
+    Numero_depot_sortant INT NOT NULL,
+    FOREIGN KEY (Immatriculation) REFERENCES Camion(Immatriculation),
+    FOREIGN KEY (Identifiant) REFERENCES Chauffeur(Identifiant),
+    FOREIGN KEY (Numero_depot_entrant) REFERENCES Depot(Numero_depot),
+    FOREIGN KEY (Numero_depot_sortant) REFERENCES Depot(Numero_depot)
 );
 
 -- ============================================================
@@ -136,13 +145,13 @@ CREATE TABLE Stocker (
 --   Table : not needded                                            
 
 -- ============================================================
-CREATE TABLE Transporter (
+/*CREATE TABLE Transporter (
     Immatriculation VARCHAR(20),
     Reference VARCHAR(20),
     PRIMARY KEY (Immatriculation, Reference),
     FOREIGN KEY (Immatriculation) REFERENCES Camion(Immatriculation),
     FOREIGN KEY (Reference) REFERENCES Livraison(Reference)
-);
+);*/
 
 -- ============================================================
 
@@ -163,26 +172,26 @@ CREATE TABLE Commettre (
 --   Table :                                             
 --not needed
 -- ============================================================
-CREATE TABLE Recevoir (
+/*CREATE TABLE Recevoir (
     Numero_depot VARCHAR(20),
     Reference VARCHAR(20),
     PRIMARY KEY (Numero_depot, Reference),
     FOREIGN KEY (Numero_depot) REFERENCES Depot(Numero_depot),
     FOREIGN KEY (Reference) REFERENCES Livraison(Reference)
-);
+);*/
 
 -- ============================================================
 --   Table :                                             
 --not needed
 -- ============================================================
-CREATE TABLE Livrer (
+/*CREATE TABLE Livrer (
     Reference VARCHAR(20),
     Code_produit VARCHAR(20),
     Quantite_livree INT,
     PRIMARY KEY (Reference, Code_produit),
     FOREIGN KEY (Reference) REFERENCES Livraison(Reference),
     FOREIGN KEY (Code_produit) REFERENCES Produit(Code_produit)
-);
+);*/
 -- ============================================================
 
 --   Table : MANAGE (Un admin manage les chaufeur)                                            
@@ -192,7 +201,9 @@ CREATE TABLE Manager {
     Identifiant_admin INT,
     Identifiant_chauffeur INT,
     PRIMARY KEY (Identifiant_admin, Identifiant_chauffeur),
-    FOREIGN KEY (Identifiant_admin, Identifiant_chauffeur)
+    FOREIGN KEY (Identifiant_chauffeur) REFERENCES Chauffeur(Identifiant),
+    FOREIGN KEY (Identifiant_admin) REFERENCES Admin(Identifiant)
+    /*FOREIGN KEY (Identifiant_admin, Identifiant_chauffeur)*/
 };
 -- ============================================================
 
@@ -203,7 +214,9 @@ CREATE TABLE Gerer {
     Identifiant INT, 
     Reference VARCHAR(20),
     PRIMARY KEY (Identifiant, Reference),
-    FOREIGN KEY (Identifiant, Reference)
+    -- FOREIGN KEY (Identifiant, Reference) doesn't provide a reference to a table
+    FOREIGN KEY (Identifiant) REFERENCES Admin(Identifiant),
+    FOREIGN KEY (Reference) REFERENCES Livraisons(Reference)
 };
 -- ============================================================
 
@@ -215,5 +228,7 @@ CREATE TABLE Contenir {
     Code_produit VARCHAR(20),
     Quantite_livree INT,
     PRIMARY KEY (Reference, Code_produit),
-    FOREIGN KEY (Reference, Code_produit),
+    FOREIGN KEY (Reference) REFERENCES Livraisons(Reference),
+    FOREIGN KEY (Code_produit) REFERENCES produits(Code_produit)
+    -- FOREIGN KEY (Reference, Code_produit) doesn't provide a reference to a table
 };
