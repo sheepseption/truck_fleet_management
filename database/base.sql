@@ -19,6 +19,9 @@ DROP TABLE IF EXISTS Livraison;
 DROP TABLE IF EXISTS Camion;
 DROP TABLE IF EXISTS Personnel;
 DROP TABLE IF EXISTS Modele;
+DROP TABLE IF EXISTS Manager;
+DROP TABLE IF EXISTS Gerer;
+DROP TABLE IF EXISTS Contenir;
 
 -- ============================================================
 --   Table : PERSONNEL                                            
@@ -78,7 +81,7 @@ CREATE TABLE Camion (
 -- ============================================================
 --   Table : LIVRAISON                                            
 -- ============================================================
-CREATE TABLE Livraisons (
+CREATE TABLE Livraison (
     Reference VARCHAR(20) PRIMARY KEY,
     Date_livraison DATE,
     Qualite_livraison VARCHAR(50)
@@ -164,7 +167,7 @@ CREATE TABLE Gerer {
     PRIMARY KEY (Identifiant, Reference),
     -- FOREIGN KEY (Identifiant, Reference) doesn't provide a reference to a table
     FOREIGN KEY (Identifiant) REFERENCES Admin(Identifiant),
-    FOREIGN KEY (Reference) REFERENCES Livraisons(Reference)
+    FOREIGN KEY (Reference) REFERENCES Livraison(Reference)
 };
 
 -- ============================================================
@@ -175,7 +178,7 @@ CREATE TABLE Contenir {
     Code_produit VARCHAR(20),
     Quantite_livree INT,
     PRIMARY KEY (Reference, Code_produit),
-    FOREIGN KEY (Reference) REFERENCES Livraisons(Reference),
-    FOREIGN KEY (Code_produit) REFERENCES produits(Code_produit)
+    FOREIGN KEY (Reference) REFERENCES Livraison(Reference),
+    FOREIGN KEY (Code_produit) REFERENCES Produit(Code_produit)
     -- FOREIGN KEY (Reference, Code_produit) doesn't provide a reference to a table
 };
