@@ -8,10 +8,7 @@
 
 -- ============================================================
 
-DROP TABLE IF EXISTS Livrer; --pourquoi??
-DROP TABLE IF EXISTS Recevoir; --?
 DROP TABLE IF EXISTS Commettre;
-DROP TABLE IF EXISTS Transporter; --?
 DROP TABLE IF EXISTS Stocker;
 DROP TABLE IF EXISTS Admin;
 DROP TABLE IF EXISTS Chauffeur;
@@ -21,12 +18,10 @@ DROP TABLE IF EXISTS Produit;
 DROP TABLE IF EXISTS Livraison;
 DROP TABLE IF EXISTS Camion;
 DROP TABLE IF EXISTS Personnel;
--- il manque : manager - gérer - contenir
+DROP TABLE IF EXISTS Modele;
 
 -- ============================================================
-
 --   Table : PERSONNEL                                            
-
 -- ============================================================
 CREATE TABLE Personnel (
     Identifiant INT PRIMARY KEY,
@@ -39,9 +34,7 @@ CREATE TABLE Personnel (
 );
 
 -- ============================================================
-
 --   Table : CHAUFFEUR (Hérite de personnel)                           
-
 -- ============================================================
 CREATE TABLE Chauffeur (
     Identifiant INT PRIMARY KEY,
@@ -50,9 +43,7 @@ CREATE TABLE Chauffeur (
 );
 
 -- ============================================================
-
 --   Table : ADMIN (Hérite de personnel)                                  
-
 -- ============================================================
 CREATE TABLE Admin (
     Identifiant INT PRIMARY KEY,
@@ -61,9 +52,17 @@ CREATE TABLE Admin (
 );
 
 -- ============================================================
+--   Table : MODÈLE                                            
+-- ============================================================
+CREATE TABLE Modele (
+    Numero_modele INT PRIMARY KEY,
+    Marque VARCHAR(25);
+    Type_vehicule VARCHAR(25);
+    Capacité INT
+);
 
+-- ============================================================
 --   Table : CAMION                                            
-
 -- ============================================================
 CREATE TABLE Camion (
     Immatriculation VARCHAR(20) PRIMARY KEY,
@@ -73,14 +72,12 @@ CREATE TABLE Camion (
     Etat VARCHAR(50),
     Kilometrage_vidange INT,
     Date_controle_technique DATE
+    FOREIGN KEY (Numero_modele) REFERENCES Modele(Numero_modele);
 );
 
 -- ============================================================
-
 --   Table : LIVRAISON                                            
-
 -- ============================================================
-
 CREATE TABLE Livraisons (
     Reference VARCHAR(20) PRIMARY KEY,
     Date_livraison DATE,
@@ -96,9 +93,7 @@ CREATE TABLE Livraisons (
 );
 
 -- ============================================================
-
---   Table : PRODUIT                                            
-
+--   Table : PRODUIT                                           
 -- ============================================================
 CREATE TABLE Produit (
     Code_produit VARCHAR(20) PRIMARY KEY,
@@ -107,9 +102,7 @@ CREATE TABLE Produit (
 );
 
 -- ============================================================
-
 --   Table : DEPÔT                                            
-
 -- ============================================================
 CREATE TABLE Depot (
     Numero_depot VARCHAR(20) PRIMARY KEY,
@@ -118,18 +111,14 @@ CREATE TABLE Depot (
 );
 
 -- ============================================================
-
---   Table : INFRACTION                                            
-
+--   Table : INFRACTION                                           
 -- ============================================================
 CREATE TABLE Infraction (
     Type VARCHAR(50) PRIMARY KEY
 );
 
 -- ============================================================
-
 --   Table : STOCKER                                            
-
 -- ============================================================
 CREATE TABLE Stocker (
     Numero_depot VARCHAR(20),
@@ -140,23 +129,10 @@ CREATE TABLE Stocker (
     FOREIGN KEY (Code_produit) REFERENCES Produit(Code_produit)
 );
 
--- ============================================================
 
---   Table : not needded                                            
 
 -- ============================================================
-/*CREATE TABLE Transporter (
-    Immatriculation VARCHAR(20),
-    Reference VARCHAR(20),
-    PRIMARY KEY (Immatriculation, Reference),
-    FOREIGN KEY (Immatriculation) REFERENCES Camion(Immatriculation),
-    FOREIGN KEY (Reference) REFERENCES Livraison(Reference)
-);*/
-
--- ============================================================
-
 --   Table : COMMETTRE (Un chauffeur commet une infraction)                                            
-
 -- ============================================================
 CREATE TABLE Commettre (
     Identifiant INT,
@@ -168,34 +144,7 @@ CREATE TABLE Commettre (
 );
 
 -- ============================================================
-
---   Table :                                             
---not needed
--- ============================================================
-/*CREATE TABLE Recevoir (
-    Numero_depot VARCHAR(20),
-    Reference VARCHAR(20),
-    PRIMARY KEY (Numero_depot, Reference),
-    FOREIGN KEY (Numero_depot) REFERENCES Depot(Numero_depot),
-    FOREIGN KEY (Reference) REFERENCES Livraison(Reference)
-);*/
-
--- ============================================================
---   Table :                                             
---not needed
--- ============================================================
-/*CREATE TABLE Livrer (
-    Reference VARCHAR(20),
-    Code_produit VARCHAR(20),
-    Quantite_livree INT,
-    PRIMARY KEY (Reference, Code_produit),
-    FOREIGN KEY (Reference) REFERENCES Livraison(Reference),
-    FOREIGN KEY (Code_produit) REFERENCES Produit(Code_produit)
-);*/
--- ============================================================
-
 --   Table : MANAGE (Un admin manage les chaufeur)                                            
-
 -- ============================================================
 CREATE TABLE Manager {
     Identifiant_admin INT,
@@ -205,10 +154,9 @@ CREATE TABLE Manager {
     FOREIGN KEY (Identifiant_admin) REFERENCES Admin(Identifiant)
     /*FOREIGN KEY (Identifiant_admin, Identifiant_chauffeur)*/
 };
+
 -- ============================================================
-
 --   Table : GERER (Un admin gère les livraisons)                                            
-
 -- ============================================================
 CREATE TABLE Gerer {
     Identifiant INT, 
@@ -218,10 +166,9 @@ CREATE TABLE Gerer {
     FOREIGN KEY (Identifiant) REFERENCES Admin(Identifiant),
     FOREIGN KEY (Reference) REFERENCES Livraisons(Reference)
 };
+
 -- ============================================================
-
 --   Table : CONTENIR (Une livraison contient des produits)                                            
-
 -- ============================================================
 CREATE TABLE Contenir {
     Reference VARCHAR(20),
