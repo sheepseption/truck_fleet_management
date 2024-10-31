@@ -77,7 +77,7 @@ Chauffeurs:
 *  classer les chauffeurs selon les moyennes des distances.
         > sélectionner les chauffeurs qui font des longues/courtes livraisons selon les moyennes.
 
-Camoions:
+Camions:
 *  afficher la moyenne des poids qu'un camion transporte.
 *  classer les camions selon la moyenne des poids.
 *  

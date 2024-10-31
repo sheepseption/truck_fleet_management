@@ -31,7 +31,7 @@ CREATE TABLE Personnel (
     Nom VARCHAR(50),
     Prenom VARCHAR(50),
     Adresse VARCHAR(100),
-    Ville VARCHAR(50),
+    Ville_personnel VARCHAR(50),
     Anciennete INT,
     Absence INT
 );
@@ -110,7 +110,7 @@ CREATE TABLE Produit (
 CREATE TABLE Depot (
     Numero_depot VARCHAR(20) PRIMARY KEY,
     Nom_depot VARCHAR(50),
-    Ville VARCHAR(50)
+    Ville_depot VARCHAR(50)
 );
 
 -- ============================================================
