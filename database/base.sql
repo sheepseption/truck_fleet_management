@@ -59,8 +59,8 @@ CREATE TABLE Admin (
 -- ============================================================
 CREATE TABLE Modele (
     Numero_modele INT PRIMARY KEY,
-    Marque VARCHAR(25);
-    Type_vehicule VARCHAR(25);
+    Marque VARCHAR(25),
+    Type_vehicule VARCHAR(25),
     Capacité INT
 );
 
@@ -74,8 +74,18 @@ CREATE TABLE Camion (
     Kilometrage INT,
     Etat VARCHAR(50),
     Kilometrage_vidange INT,
-    Date_controle_technique DATE
-    FOREIGN KEY (Numero_modele) REFERENCES Modele(Numero_modele);
+    Date_controle_technique DATE,
+    Numero_modele INT,
+    FOREIGN KEY (Numero_modele) REFERENCES Modele(Numero_modele)
+);
+
+-- ============================================================
+--   Table : DEPÔT                                            
+-- ============================================================
+CREATE TABLE Depot (
+    Numero_depot INT PRIMARY KEY,
+    Nom_depot VARCHAR(50),
+    Ville_depot VARCHAR(50)
 );
 
 -- ============================================================
@@ -84,8 +94,8 @@ CREATE TABLE Camion (
 CREATE TABLE Livraison (
     Reference VARCHAR(20) PRIMARY KEY,
     Date_livraison DATE,
-    Qualite_livraison VARCHAR(50)
-    Immatriculation INT NOT NULL,
+    Qualite_livraison VARCHAR(50),
+    Immatriculation VARCHAR(20) NOT NULL,
     Identifiant INT NOT NULL,
     Numero_depot_entrant INT NOT NULL,
     Numero_depot_sortant INT NOT NULL,
@@ -105,15 +115,6 @@ CREATE TABLE Produit (
 );
 
 -- ============================================================
---   Table : DEPÔT                                            
--- ============================================================
-CREATE TABLE Depot (
-    Numero_depot VARCHAR(20) PRIMARY KEY,
-    Nom_depot VARCHAR(50),
-    Ville_depot VARCHAR(50)
-);
-
--- ============================================================
 --   Table : INFRACTION                                           
 -- ============================================================
 CREATE TABLE Infraction (
@@ -124,14 +125,13 @@ CREATE TABLE Infraction (
 --   Table : STOCKER                                            
 -- ============================================================
 CREATE TABLE Stocker (
-    Numero_depot VARCHAR(20),
+    Numero_depot INT,
     Code_produit VARCHAR(20),
     Quantite_stockee INT,
     PRIMARY KEY (Numero_depot, Code_produit),
     FOREIGN KEY (Numero_depot) REFERENCES Depot(Numero_depot),
     FOREIGN KEY (Code_produit) REFERENCES Produit(Code_produit)
 );
-
 
 
 -- ============================================================
@@ -149,31 +149,31 @@ CREATE TABLE Commettre (
 -- ============================================================
 --   Table : MANAGE (Un admin manage les chaufeur)                                            
 -- ============================================================
-CREATE TABLE Manager {
+CREATE TABLE Manager (
     Identifiant_admin INT,
     Identifiant_chauffeur INT,
     PRIMARY KEY (Identifiant_admin, Identifiant_chauffeur),
     FOREIGN KEY (Identifiant_chauffeur) REFERENCES Chauffeur(Identifiant),
     FOREIGN KEY (Identifiant_admin) REFERENCES Admin(Identifiant)
     /*FOREIGN KEY (Identifiant_admin, Identifiant_chauffeur)*/
-};
+);
 
 -- ============================================================
 --   Table : GERER (Un admin gère les livraisons)                                            
 -- ============================================================
-CREATE TABLE Gerer {
+CREATE TABLE Gerer (
     Identifiant INT, 
     Reference VARCHAR(20),
     PRIMARY KEY (Identifiant, Reference),
     -- FOREIGN KEY (Identifiant, Reference) doesn't provide a reference to a table
     FOREIGN KEY (Identifiant) REFERENCES Admin(Identifiant),
     FOREIGN KEY (Reference) REFERENCES Livraison(Reference)
-};
+);
 
 -- ============================================================
 --   Table : CONTENIR (Une livraison contient des produits)                                            
 -- ============================================================
-CREATE TABLE Contenir {
+CREATE TABLE Contenir (
     Reference VARCHAR(20),
     Code_produit VARCHAR(20),
     Quantite_livree INT,
@@ -181,4 +181,4 @@ CREATE TABLE Contenir {
     FOREIGN KEY (Reference) REFERENCES Livraison(Reference),
     FOREIGN KEY (Code_produit) REFERENCES Produit(Code_produit)
     -- FOREIGN KEY (Reference, Code_produit) doesn't provide a reference to a table
-};
+);
