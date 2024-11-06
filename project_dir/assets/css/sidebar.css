@@ -1,0 +1,81 @@
+/* Sidebar Container Styles */
+#sidenav-main {
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient background */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow for a lifted look */
+}
+
+.sidenav-header {
+    padding: 16px;
+    background-color: #2a5298; /* Darker background for header */
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidenav-header .navbar-brand {
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.sidenav-header .navbar-brand:hover {
+    color: #e0e0e0;
+}
+
+/* Sidebar Navigation Items */
+.navbar-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-item {
+    margin: 8px 0; /* Spacing between items */
+}
+
+.nav-link {
+    color: #ffffff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    border-radius: 8px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Highlight on hover */
+    color: #d1d1d1;
+}
+
+.nav-link.active {
+    background-color: #3498db; /* Highlight color for active link */
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+/* Icon Styles */
+.nav-link .material-icons {
+    font-size: 20px;
+    margin-right: 8px; /* Space between icon and text */
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+/* Sidebar Footer Button */
+.sidenav-footer {
+    background: #1e3c72;
+    padding: 16px;
+}
+
+.sidenav-footer .btn {
+    background: linear-gradient(135deg, #3498db, #2a5298); /* Gradient button */
+    color: #ffffff;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.sidenav-footer .btn:hover {
+    background: linear-gradient(135deg, #2a5298, #3498db); /* Reverse gradient on hover */
+    color: #e0e0e0;
+}

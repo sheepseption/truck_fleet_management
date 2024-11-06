@@ -1,0 +1,30 @@
+.container-fluid.d-flex.flex-wrap.justify-content-start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adds spacing between cards */
+    justify-content: space-between; /* Ensures cards are evenly spaced */
+}
+
+.card {
+    flex: 1 1 calc(45% - 20px); /* Adjusts width to fit two cards per row */
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 100%; /* Stacks cards vertically on small screens */
+    }
+}
+.table {
+    width: 100%;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.table th, .table td {
+    text-align: center; /* Centers text */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f0f0f0; /* Highlights the row on hover */
+}

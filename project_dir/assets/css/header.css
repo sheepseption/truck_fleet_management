@@ -1,0 +1,62 @@
+/* Header Styles */
+.header {
+    background-color: #2c3e50; /* Dark background for the header */
+    color: #ffffff; /* White text color for contrast */
+    padding: 20px 30px; /* Increase padding for a bigger header */
+    border-bottom: 2px solid #3498db; /* Highlight the bottom of the header */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Subtle shadow for a lifted effect */
+}
+
+/* Header Title Styling */
+.header h1 {
+    font-size: 28px; /* Larger font size for the header title */
+    font-weight: bold; /* Bold text for emphasis */
+    margin: 0; /* Remove default margin */
+}
+
+.header h1 span {
+    color: #3498db; /* Highlight part of the title with primary color */
+}
+
+/* Header Subtitle */
+.header p {
+    font-size: 16px; /* Subtitle size */
+    margin-top: 5px; /* Space between the title and subtitle */
+    color: #b0c4de; /* Light color for subtitle */
+}
+
+/* Adjusting the padding and spacing for the main header container */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navigation links in the header */
+.header-nav {
+    display: flex;
+    gap: 15px; /* Space between nav items */
+}
+
+.header-nav a {
+    color: #ffffff; /* White text color for links */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease-in-out;
+}
+
+.header-nav a:hover {
+    color: #3498db; /* Highlight color on hover */
+}
+
+/* Button in the header */
+.header .btn-primary {
+    background-color: #3498db !important; /* New color for buttons */
+    border-color: #3498db !important;
+    padding: 10px 20px; /* Increase button padding */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.header .btn-primary:hover {
+    background-color: #2980b9 !important; /* Darker shade on hover */
+}
