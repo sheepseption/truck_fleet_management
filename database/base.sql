@@ -182,3 +182,31 @@ CREATE TABLE Contenir (
     FOREIGN KEY (Code_produit) REFERENCES Produit(Code_produit)
     -- FOREIGN KEY (Reference, Code_produit) doesn't provide a reference to a table
 );
+
+
+-- ============================================================
+--   Table : DISTANCE                                           
+-- ============================================================
+CREATE TABLE Distance (
+    DepotA INT,
+    DepotB INT,
+    Distance DECIMAL(10,2),
+    PRIMARY KEY (DepotA, DepotB),
+    FOREIGN KEY (DepotA) REFERENCES Depot(Numero_depot),
+    FOREIGN KEY (DepotB) REFERENCES Depot(Numero_depot),
+    
+);
+
+
+
+-- ============================================================
+--   Table : PARKING                                          
+-- ============================================================
+/*CREATE TABLE Parking (
+    Ville_parking VARCHAR(50),
+    DepotB INT,
+    
+    FOREIGN KEY (DepotA) REFERENCES Depot(Numero_depot),
+    FOREIGN KEY (DepotB) REFERENCES Depot(Numero_depot),
+    
+);*/
