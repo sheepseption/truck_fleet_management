@@ -22,6 +22,9 @@ DROP TABLE IF EXISTS Modele;
 DROP TABLE IF EXISTS Manager;
 DROP TABLE IF EXISTS Gerer;
 DROP TABLE IF EXISTS Contenir;
+DROP TABLE IF EXISTS Distance;
+
+DROP TYPE IF EXISTS qualité;
 
 -- ============================================================
 --   Table : PERSONNEL                                            
@@ -61,34 +64,48 @@ CREATE TABLE Modele (
     Numero_modele INT PRIMARY KEY,
     Marque VARCHAR(25),
     Type_vehicule VARCHAR(25),
-    Marque VARCHAR(25),
-    Type_vehicule VARCHAR(25),
     Capacité INT
 );
 
 -- ============================================================
 --   Table : CAMION                                            
 -- ============================================================
+CREATE TYPE état AS ENUM ('Disponible', 'En Maintenance', 'En Panne');
+
 CREATE TABLE Camion (
     Immatriculation VARCHAR(20) PRIMARY KEY,
     Date_mise_en_service DATE,
     Date_achat DATE,
     Kilometrage INT,
-    Etat VARCHAR(50),
+    Etat état,
     Kilometrage_vidange INT,
     Date_controle_technique DATE,
     Localisation VARCHAR(50),
+    Numero_modele INT,
     FOREIGN KEY (Numero_modele) REFERENCES Modele(Numero_modele)
+);
+
+-- ============================================================
+--   Table : DEPÔT                                            
+-- ============================================================
+
+CREATE TABLE Depot (
+    Numero_depot INT PRIMARY KEY,
+    Nom_depot VARCHAR(50),
+    Ville_depot VARCHAR(50)
 );
 
 -- ============================================================
 --   Table : LIVRAISON                                            
 -- ============================================================
+
+CREATE TYPE qualité AS ENUM ('Terrible', 'Mauvaise' ,'Moyenne', 'Bonne', 'Excellent');
+
 CREATE TABLE Livraison (
     Reference VARCHAR(20) PRIMARY KEY,
     Date_livraison DATE,
-    Qualite_livraison VARCHAR(50),
-    Immatriculation INT NOT NULL,
+    Qualite_livraison qualité,
+    Immatriculation VARCHAR(20) NOT NULL,
     Identifiant INT NOT NULL,
     Numero_depot_entrant INT NOT NULL,
     Numero_depot_sortant INT NOT NULL,
@@ -186,8 +203,7 @@ CREATE TABLE Distance (
     Distance DECIMAL(10,2),
     PRIMARY KEY (DepotA, DepotB),
     FOREIGN KEY (DepotA) REFERENCES Depot(Numero_depot),
-    FOREIGN KEY (DepotB) REFERENCES Depot(Numero_depot),
-    
+    FOREIGN KEY (DepotB) REFERENCES Depot(Numero_depot)  
 );
 
 
