@@ -76,6 +76,7 @@ CREATE TABLE Camion (
     Kilometrage_vidange INT,
     Date_controle_technique DATE,
     Numero_modele INT,
+    Localisation VARCHAR(50),
     FOREIGN KEY (Numero_modele) REFERENCES Modele(Numero_modele)
 );
 
