@@ -17,25 +17,50 @@ if (!$connection) {
 // if form was submitted
 if (isset($_POST["save_btn"])) {
     // we will assign input data
-    $name = mysqli_real_escape_string($connection, $_POST['name']);
-    $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $phone = mysqli_real_escape_string($connection, $_POST['phone']);
-    $address = mysqli_real_escape_string($connection, $_POST['address']);
+    $id_personnel = mysqli_real_escape_string($connection, $_POST['Identifiant']);
+    $nom = mysqli_real_escape_string($connection, $_POST['Nom']);
+    $prenom = mysqli_real_escape_string($connection, $_POST['Prenom']);
+    $adresse = mysqli_real_escape_string($connection, $_POST['Adresse']);
+    $ville_personnel = mysqli_real_escape_string($connection, $_POST['Ville_personnel']);
+    $Anciennete = mysqli_real_escape_string($connection, $_POST['Anciennete']);
+    $Absence = mysqli_real_escape_string($connection, $_POST['Absence']);
+    $type_permis = mysqli_real_escape_string($connection, $_POST['Type_permis']);
+
 
     // duplicate query
-    $email_check_query = "SELECT * FROM drivers WHERE email='$email' LIMIT 1";
-    $result = mysqli_query($connection, $email_check_query);
+    $id_check_query = "SELECT * FROM Chauffeur WHERE Identifiant ='$id_personnel' LIMIT 1";
+    $result = mysqli_query($connection, $id_check_query);
     $existing_user = mysqli_fetch_assoc($result);
     $other_conditions=true;
     if ($existing_user) {
         // Email already exists
-        $_SESSION['status'] = "DATA INSERT FAILED: This email is already registered.";
+        $_SESSION['status'] = "DATA INSERT FAILED: This id is already registered.";
         $other_conditions=false; // error message
         header('Location: insert.php');
         exit();
     } else {
-        // Prepare the insert query
-        $insert_query = "INSERT INTO drivers (name, email, phone, address) VALUES ('$name', '$email', '$phone', '$address')";
+        // Prepare the insert query personnel
+        $insert_query_personnel = "INSERT INTO Personnel VALUES ('$id_personnel', '$nom', '$prenom', '$adresse', '$ville_personnel', '$Anciennete', '$Absence')";
+        // Execute the insert query
+        $insert_query_run_perso = mysqli_query($connection, $insert_query_personnel);
+
+        // Check if the insertion was successful
+        if ($insert_query_run_perso && $other_conditions) {
+            $_SESSION['status'] = "DATA INSERTED SUCCESSFULLY";
+            $_SESSION['status_code']="success";
+            header('Location: index.php');
+            exit(); // Exit to prevent further script execution
+        } else {
+            // Log the error message
+            $error_message = mysqli_error($connection);
+            $_SESSION['status'] = "DATA PERSO INSERT FAILED: " . $error_message;
+            $_SESSION['status_code'] = "error";
+            header('Location: insert.php');
+            exit(); // Exit to prevent further script execution
+        }
+
+        // Prepare the insert query chauffeur
+        $insert_query = "INSERT INTO Chauffeur VALUES ('$id_personnel', '$type_permis')";
 
         // Execute the insert query
         $insert_query_run = mysqli_query($connection, $insert_query);

@@ -17,8 +17,8 @@
         $currentPage = 1;
     }
 
-    // On détermine le nombre total d'étudiants en fonction de la recherche
-    $sqlCount = 'SELECT COUNT(*) AS nb_drivers FROM drivers WHERE name LIKE ? OR email LIKE ?;';
+    // On détermine le nombre total de chauffeurs en fonction de la recherche
+    $sqlCount = 'SELECT COUNT(*) AS nb_drivers FROM Chauffeur NATURAL JOIN Personnel WHERE Nom LIKE ? OR Identifiant LIKE ?;';
     $stmtCount = mysqli_prepare($connection, $sqlCount);
     $searchParam = "%" . $searchQuery . "%";
     mysqli_stmt_bind_param($stmtCount, 'ss', $searchParam, $searchParam);
@@ -27,17 +27,17 @@
     $rowCount = mysqli_fetch_assoc($resultCount);
     $nbdrivers = (int) $rowCount['nb_drivers'];
 
-    // On détermine le nombre d'étudiants par page
+    // On détermine le nombre de chauffeur par page
     $parPage = 10;
 
     // On calcule le nombre de pages total
     $pages = ceil($nbdrivers / $parPage);
 
-    // Calcul du premier étudiant de la page
+    // Calcul du premier chauffeur de la page
     $premier = ($currentPage * $parPage) - $parPage;
 
-    // Requête pour récupérer les étudiants de la page actuelle
-    $fetch_query = "SELECT * FROM drivers WHERE name LIKE ? OR email LIKE ? ORDER BY id LIMIT ?, ?;";
+    // Requête pour récupérer les chauffeurs de la page actuelle
+    $fetch_query = "SELECT * FROM Chauffeur WHERE Nom LIKE ? OR Identifiant LIKE ? ORDER BY Identifiant LIMIT ?, ?;";
     $stmt = mysqli_prepare($connection, $fetch_query);
     mysqli_stmt_bind_param($stmt, 'ssii', $searchParam, $searchParam, $premier, $parPage);
     mysqli_stmt_execute($stmt);
@@ -58,7 +58,7 @@
                     <div class="col-md-8">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search_query"
-                                placeholder="Search by name or email"
+                                placeholder="Search by name or id"
                                 value="<?php echo htmlspecialchars($searchQuery); ?>" aria-label="Search query"
                                 style="color: #495057; background-color: #f8f9fa;">
                             <button type="submit" name="search" class="btn btn-primary">
@@ -74,11 +74,11 @@
             <table class="table table-hover">
                 <thead style="background-color: #4a4a4a; color: white;">
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Address</th>
+                        <th scope="col">Identifiant</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Anciennete</th>
+                        <th scope="col">Adresse</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -88,13 +88,13 @@
                         while ($row = mysqli_fetch_assoc($fetch_query_run)) {
                     ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['phone']); ?></td>
-                        <td><?php echo htmlspecialchars($row['address']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Identifiant']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Nom']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Prenom']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Anciennete']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Adresse']); ?></td>
                         <td>
-                            <a href="edit_driver.php?id=<?php echo $row['id']; ?>" class="btn btn-sm"
+                            <a href="edit_driver.php?id=<?php echo $row['Identifiant']; ?>" class="btn btn-sm"
                                 style="background-color: #004b6b; color: #ffffff;">
                                 <i class="bi bi-pencil"></i> Edit
                             </a>

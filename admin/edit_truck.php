@@ -13,7 +13,7 @@
 
                     // Function to fetch truck data
                     function fetchTruck($connection, $truckId) {
-                        $fetchQuery = "SELECT * FROM trucks WHERE id = ?";
+                        $fetchQuery = "SELECT * FROM Camion WHERE Immatriculation = ?";
                         $stmt = mysqli_prepare($connection, $fetchQuery);
                         mysqli_stmt_bind_param($stmt, 'i', $truckId);
                         mysqli_stmt_execute($stmt);
@@ -21,10 +21,10 @@
                     }
 
                     // Function to update truck data
-                    function updateTruck($connection, $truckId, $licensePlate, $model, $year, $capacity) {
-                        $updateQuery = "UPDATE trucks SET license_plate = ?, model = ?, year = ?, capacity = ? WHERE id = ?";
+                    function updateTruck($connection, $truckId, $Immatriculation, $Date_service, $Date_achat, $kilo, $Etat, $kilo_vidange, $Date_controle, $Localisation) {
+                        $updateQuery = "UPDATE Camion SET Immatriculation = ?, Date_mise_en_service = ?, Date_achat = ?, Kilometrage = ?, Etat = ?, Kilometrage_vidange = ?, Date_controle_technique = ?, Localisation = ? WHERE id = ?";
                         $updateStmt = mysqli_prepare($connection, $updateQuery);
-                        mysqli_stmt_bind_param($updateStmt, 'ssssi', $licensePlate, $model, $year, $capacity, $truckId);
+                        mysqli_stmt_bind_param($updateStmt, 'ssssi', $truckId, $Immatriculation, $Date_service, $Date_achat, $kilo, $Etat, $kilo_vidange, $Date_controle, $Localisation, $truckId);
                         return mysqli_stmt_execute($updateStmt);
                     }
 
@@ -42,13 +42,17 @@
 
                         // Check if the form has been submitted
                         if (isset($_POST['update_btn'])) {
-                            $licensePlate = htmlspecialchars(trim($_POST['license_plate']));
-                            $model = htmlspecialchars(trim($_POST['model']));
-                            $year = htmlspecialchars(trim($_POST['year']));
-                            $capacity = htmlspecialchars(trim($_POST['capacity']));
+                            $Immatriculation = htmlspecialchars(trim($_POST['Immatriculation']));
+                            $Date_service = htmlspecialchars(trim($_POST['Date_mise_en_service']));
+                            $Date_achat = htmlspecialchars(trim($_POST['Date_achat']));
+                            $kilo = htmlspecialchars(trim($_POST['Kilometrage']));
+                            $Etat = htmlspecialchars(trim($_POST['Etat']));
+                            $kilo_vidange = htmlspecialchars(trim($_POST['Kilometrage_vidange']));
+                            $Date_controle = htmlspecialchars(trim($_POST['Date_controle_technique']));
+                            $Localisation = htmlspecialchars(trim($_POST['Localisation']));
 
                             // Update the truck record in the database
-                            if (updateTruck($connection, $truckId, $licensePlate, $model, $year, $capacity)) {
+                            if (updateTruck($connection, $truckId, $Immatriculation, $Date_service, $Date_achat, $kilo, $Etat, $kilo_vidange, $Date_controle, $Localisation)) {
                                 echo "<div class='alert alert-success'>Truck record updated successfully.</div>";
                             } else {
                                 echo "<div class='alert alert-danger'>Error updating record: " . mysqli_error($connection) . "</div>";

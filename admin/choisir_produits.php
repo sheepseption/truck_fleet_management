@@ -11,15 +11,15 @@ if ($connection->connect_error) {
 }
 
 // Récupération des entrepôts de départ et d'arrivée depuis les paramètres GET
-$departure = $_GET['departure'] ?? null;
-$arrival = $_GET['arrival'] ?? null;
-$delivery_date=$_GET['delivery_date'] ?? null;
+$departure = $_GET['Dépôt sortie'] ?? null;
+$arrival = $_GET['Dépôt arrivée'] ?? null;
+$delivery_date=$_GET['Date livraison'] ?? null;
 
 // Initialisation des produits
 $products = [];
 if ($departure) {
     // Requête pour récupérer les produits du dépôt de départ
-    $query = "SELECT id, name, quantity FROM products WHERE warehouse_id = ?";
+    $query = "SELECT Code_produit, Nom_produit, Quantite_stockee FROM Stocker NATURAL JOIN Produit WHERE Numero_depot = ?";
     $stmt = $connection->prepare($query);
 
     if ($stmt) {
@@ -53,9 +53,9 @@ if ($departure) {
 
                         <!-- Champs cachés pour les dépôts et pour la date qui ont été récupérés 
                          précedemment -->
-                        <input type="hidden" name="departure" value="<?php echo htmlspecialchars($departure); ?>">
-                        <input type="hidden" name="arrival" value="<?php echo htmlspecialchars($arrival); ?>">
-                        <input type="hidden" name="delivery_date"
+                        <input type="hidden" name="Dépot sortie" value="<?php echo htmlspecialchars($departure); ?>">
+                        <input type="hidden" name="Dépôt arrivée" value="<?php echo htmlspecialchars($arrival); ?>">
+                        <input type="hidden" name="Date livraison"
                             value="<?php echo htmlspecialchars($delivery_date); ?>">
                         <div class="mb-3">
                             <label class="form-label fw-bold text-primary">Produits à envoyer :</label>
@@ -73,12 +73,12 @@ if ($departure) {
                                         <?php if (!empty($products)) : ?>
                                         <?php foreach ($products as $product) : ?>
                                         <tr>
-                                            <td><?php echo htmlspecialchars($product['name']); ?></td>
-                                            <td><?php echo htmlspecialchars($product['quantity']); ?></td>
+                                            <td><?php echo htmlspecialchars($product['Nom_produit']); ?></td>
+                                            <td><?php echo htmlspecialchars($product['Quantite_stockee']); ?></td>
                                             <td>
-                                                <input type="number" name="products[<?php echo $product['id']; ?>]"
+                                                <input type="number" name="products[<?php echo $product['Code_produit']; ?>]"
                                                     class="form-control" min="0"
-                                                    max="<?php echo htmlspecialchars($product['quantity']); ?>"
+                                                    max="<?php echo htmlspecialchars($product['Quantite_stockee']); ?>"
                                                     placeholder="0">
                                             </td>
                                         </tr>
