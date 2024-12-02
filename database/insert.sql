@@ -19,10 +19,10 @@ INSERT INTO Personnel (Identifiant, Nom, Prenom, Adresse, Ville_personnel, Ancie
 
 -- CHAUFFEUR
 INSERT INTO Chauffeur (Identifiant, Type_permis) VALUES
-(3, 'Permis B'),
-(1, 'Permis C'),
-(5, 'Permis C'),
-(6, 'Permis C');
+(3, 'B'),
+(1, 'C'),
+(5, 'C'),
+(6, 'A');
 
 -- ADMIN
 INSERT INTO Admin (Identifiant, Poste) VALUES
@@ -98,29 +98,31 @@ INSERT INTO Infraction (Type) VALUES
 
 -- STOCKER
 INSERT INTO Stocker (Numero_depot, Code_produit, Quantite_stockee) VALUES
-(301, 'PROD-1', 100),
-(301, 'PROD-2', 50),
-(302, 'PROD-3', 200),
-(302, 'PROD-1', 150),
-(302, 'PROD-2', 100),
-(303, 'PROD-1', 100),
-(303, 'PROD-2', 50),
-(304, 'PROD-3', 200),
-(304, 'PROD-1', 150),
-(304, 'PROD-2', 100),
-(305, 'PROD-1', 100),
-(305, 'PROD-2', 50),
-(305, 'PROD-3', 141),
-(306, 'PROD-3', 200),
-(306, 'PROD-1', 150),
-(306, 'PROD-2', 100);
+(301, 'PROD-1', 1000),
+(301, 'PROD-2', 500),
+(302, 'PROD-3', 2000),
+(302, 'PROD-1', 1050),
+(302, 'PROD-2', 1000),
+(303, 'PROD-1', 1000),
+(303, 'PROD-2', 500),
+(304, 'PROD-3', 2000),
+(304, 'PROD-1', 1050),
+(304, 'PROD-2', 1000),
+(305, 'PROD-1', 1000),
+(305, 'PROD-2', 500),
+(305, 'PROD-3', 1041),
+(306, 'PROD-3', 2000),
+(306, 'PROD-1', 1050),
+(306, 'PROD-2', 1000);
 
 -- COMMETTRE
 INSERT INTO Commettre (Identifiant, Type, Date) VALUES
-(1, 'Excès de vitesse', '2024-09-15'),
-(1, 'Stationnement illégal', '2024-10-01'),
-(3, 'Excès de vitesse', '2024-09-12'),
-(5, 'Stationnement illégal', '2024-10-03');
+(1, 'Excès de vitesse', '2024-09-15 10:01:00'),
+(1, 'Stationnement illégal', '2024-10-01 12:41:00'),
+(3, 'Excès de vitesse', '2024-09-12 08:15:00'),
+(3, 'Stationnement illégal', '2024-10-02 14:30:00'),
+(5, 'Excès de vitesse', '2024-09-10 09:30:00'),
+(5, 'Stationnement illégal', '2024-10-03 16:00:00');
 
 -- MANAGER
 INSERT INTO Manager (Identifiant_admin, Identifiant_chauffeur) VALUES
@@ -250,3 +252,20 @@ INSERT INTO Distance (DepotA, DepotB, Distance) VALUES
 (305,304, 141),
 (304,306, 165),
 (306,304, 165);
+
+-- PARKING
+--INSERT INTO Parking (Depot, Immatriculation, Date_Commencement) VALUES
+--(301, 'AB-123-CD', '2024-10-28'),
+--(302, 'EF-456-GH', '2024-10-29'),
+--(303, 'IJ-789-KL', '2024-10-30'),
+--(304, 'MN-101-OP', '2024-10-31'),
+--(305, 'QR-121-RS', '2024-11-01'),
+--(306, 'TU-141-VW', '2024-11-02');
+
+INSERT INTO Parking (Depot, Immatriculation, Date_Commencement, Date_fin) VALUES
+(306, 'AB-123-CD', '2024-09-28', '2024-10-02'),
+(304, 'EF-456-GH', '2024-09-29', '2024-10-03'),
+(305, 'IJ-789-KL', '2024-09-30', '2024-10-04'),
+(303, 'MN-101-OP', '2024-10-01', '2024-10-05'),
+(301, 'QR-121-RS', '2024-10-02', '2024-10-06'),
+(302, 'TU-141-VW', '2024-10-03', '2024-10-07');

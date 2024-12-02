@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS Manager;
 DROP TABLE IF EXISTS Gerer;
 DROP TABLE IF EXISTS Contenir;
 DROP TABLE IF EXISTS Distance;
+DROP TABLE IF EXISTS Parking CASCADE;
 
 -- ============================================================
 --   DROP TYPES                                            
