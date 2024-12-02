@@ -9,7 +9,7 @@
 -- récuperer le chauffeur d'une certaine ville:
 select Nom, Prenom
 from Personnel natural join Chauffeur
-where Ville = 'Atlantis';
+where Ville_personnel = 'Ville A'
 
 delimiter $$
 create procedure FromCity(city VARCHAR(50))
