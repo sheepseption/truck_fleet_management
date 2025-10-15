@@ -1,8 +1,3 @@
--- ============================================================
---    suppression des donnees
--- ============================================================
-
---TRUNCATE personnel, camion, produit, depot, livraison, contenir, gerer, admin, chauffeur, infraction, distance;
 
 -- ============================================================
 --    creation des donnees
@@ -252,15 +247,6 @@ INSERT INTO Distance (DepotA, DepotB, Distance) VALUES
 (305,304, 141),
 (304,306, 165),
 (306,304, 165);
-
--- PARKING
---INSERT INTO Parking (Depot, Immatriculation, Date_Commencement) VALUES
---(301, 'AB-123-CD', '2024-10-28'),
---(302, 'EF-456-GH', '2024-10-29'),
---(303, 'IJ-789-KL', '2024-10-30'),
---(304, 'MN-101-OP', '2024-10-31'),
---(305, 'QR-121-RS', '2024-11-01'),
---(306, 'TU-141-VW', '2024-11-02');
 
 INSERT INTO Parking (Depot, Immatriculation, Date_Commencement, Date_fin) VALUES
 (306, 'AB-123-CD', '2024-09-28', '2024-10-02'),

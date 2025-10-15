@@ -1,0 +1,48 @@
+# PHP & Web Project .gitignore
+
+# === OS & Editor files ===
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# === Logs & Temp Files ===
+*.log
+*.tmp
+*.bak
+*~
+
+# === PHP & Composer ===
+vendor/
+composer.lock
+composer.phar
+
+# === Cache / Sessions ===
+.cache/
+tmp/
+sessions/
+
+# === Node / Frontend ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Environment & Credentials ===
+.env
+.env.local
+.env.*.local
+
+# === System or metadata files ===
+*.Zone.Identifier
+__MACOSX/
+
+# === Backups ===
+*.zip
+*.tar.gz
+*.rar
+
+# === Database Dumps ===
+*.sql
+*.sqlite
+*.db
