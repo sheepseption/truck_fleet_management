@@ -1,4 +1,4 @@
-# Fleet Management Dashboard — FreeSQL Project
+# Fleet Management Dashboard — School Project
 
 > A web-based **Fleet Management System** built with **PHP**, **MySQL**, and **Bootstrap**.  
 > The project provides a full-featured admin interface to manage **trucks**, **drivers**, and **deliveries**.  
